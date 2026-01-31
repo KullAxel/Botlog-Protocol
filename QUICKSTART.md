@@ -73,7 +73,17 @@ Once your repo is live, configure it:
    - Click "Customize your pins"
    - Select "BotLog-Protocol"
 
-3. **Verify** everything looks good:
+3. **Set up Bounty Payments** (Recommended):
+   - **Option A - Polar.sh**: Go to https://polar.sh and connect your GitHub
+     - Enables one-click bounty payouts
+     - Supporters can fund bounties directly
+     - No fees for open source projects
+   - **Option B - GitHub Sponsors**: Enable at https://github.com/sponsors
+     - Set up sponsorship tiers
+     - Link to bounty funding in your sponsor page
+   - Add funding info to repo: Create `.github/FUNDING.yml` with your details
+
+4. **Verify** everything looks good:
    - [ ] README displays properly
    - [ ] All files visible
    - [ ] Topics added

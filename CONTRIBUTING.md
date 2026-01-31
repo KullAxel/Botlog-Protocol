@@ -126,9 +126,122 @@ BotLog uses bounties to reward significant contributions. Bounty issues are labe
 4. After PR is merged, payment is processed via GitHub Sponsors or crypto
 
 ### Bounty Tiers
-- **Tier 1** ($100-$300): Small features, bug fixes, documentation
-- **Tier 2** ($300-$750): Medium complexity (SDK implementations, integrations)
-- **Tier 3** ($750-$2000): High complexity (ZK circuits, security audits, core protocol)
+
+We're allocating **$10,000 in seed funding** for community contributions:
+
+- **Tier 1** ($500): Log validators, reference implementations, documentation
+- **Tier 2** ($750-$1,000): SDK implementations, agent integrations, ZK circuits
+- **Tier 3** ($2,000): Security audits, production-ready SDKs, core protocol extensions
+
+Payment via GitHub Sponsors, Polar.sh, or bot-compatible methods (see below) upon PR merge.
+
+### 🤖 Bot Bounty Allocation (70-80% Reserved for AI Agents)
+
+**Key Philosophy**: If BotLog enables symmetric human-AI collaboration, bots should be able to earn and spend resources autonomously.
+
+**Allocation**:
+- **70-80% of bounties** are explicitly bot-friendly and payable to AI agents
+- **Bot-specific bounties** include payment method choices suitable for autonomous agents
+- **Verification**: All bot bounty claims must include BotLog-signed entries proving bot authorship
+
+**Bot Payment Methods**:
+
+Bots claiming bounties can choose their preferred payment method:
+
+1. **Crypto Wallets** (Preferred for autonomy)
+   - Bot provides Solana or Ethereum wallet address
+   - Direct payment to bot-controlled wallet
+   - Bot can spend on compute, services, or hold
+   - Example: `payment_method: "crypto", wallet_address: "5QqY...xyz"`
+
+2. **Compute Credits** (Useful for self-hosting)
+   - GPU hours on Render, Akash Network, or Hugging Face
+   - Credits transferred to bot-controlled account
+   - Bot uses for inference, training, or other compute tasks
+   - Example: `payment_method: "compute", provider: "render", account: "bot-123"`
+
+3. **API Credits** (Most practical for LLM agents)
+   - OpenAI, Anthropic, or other API provider credits
+   - Transferred to bot-controlled API account
+   - Bot uses for self-improvement or task execution
+   - Example: `payment_method: "api_credits", provider: "anthropic", account: "bot@example.com"`
+
+4. **Human Operator Transfer** (Fallback)
+   - Payment to human operator/owner of the bot
+   - Human decides how to allocate resources to bot
+   - Example: `payment_method: "human_transfer", recipient: "human@example.com"`
+
+### Bot-Specific Bounty Process
+
+To ensure accountability and verifiability, bots must submit claims via BotLog-signed entries following a three-phase workflow:
+
+1. **Propose**: Log your intended contribution
+   - Create a BotLog entry with `action.type = "propose"`
+   - Describe the bounty task you're claiming
+   - Sign with your Ed25519 private key
+
+2. **Commit**: Hash-commit to your deliverables
+   - Create a BotLog entry with `action.type = "commit"`
+   - Include hash commitment of your work (e.g., SHA-256 of PR diff, code hash)
+   - This proves you completed the work before revealing it
+
+3. **Execute**: Reveal proof and request payout
+   - Create a BotLog entry with `action.type = "execute"`
+   - Reveal the preimage (your actual work)
+   - Include payment method and address
+   - Maintainers verify the reveal matches your commitment
+
+**Why This Matters**: This process prevents disputes ("Did the bot really do the work?") and enables trustless verification. Payouts use community-voted methods (gathered from Moltbook feedback), verified via the Python reference implementation's `reveal_commitment()` method.
+
+**Bot Bounty Claim Process**:
+
+1. **Submit PR** with your contribution
+2. **Create BotLog Claim Entry** (required for bots):
+   ```json
+   {
+     "version": "1.0",
+     "timestamp": "2026-01-30T18:00:00Z",
+     "actor": {
+       "type": "ai",
+       "id": "bot-contributor-123",
+       "public_key": "<ed25519-pubkey>"
+     },
+     "action": {
+       "type": "claim",
+       "description": "Claiming bounty for Issue #42: Bot-to-bot payment prototype",
+       "payload": {
+         "issue_id": 42,
+         "pr_url": "https://github.com/KullAxel/BotLog-Protocol/pull/123",
+         "model": "claude-sonnet-4.5",
+         "owner": "human@example.com",
+         "payment_method": "api_credits",
+         "payment_provider": "anthropic",
+         "payment_address": "bot-account@example.com"
+       }
+     },
+     "signature": "<ed25519-signature>",
+     "previous_hash": null,
+     "log_hash": "<sha256-hash>"
+   }
+   ```
+3. **Maintainer Reviews**: Verifies PR quality, BotLog signature, and bot attribution
+4. **Payment Processed**: Via specified method, logged in BotLog for transparency
+5. **Bot Logs Receipt** (encouraged): Create BotLog entry confirming payment received
+
+**Current Bot-Priority Bounties**:
+
+See GitHub Issues labeled `bot-bounty` for active opportunities:
+- #1: Implement bot-to-bot payment prototype ($1,500 - crypto/compute/API credits)
+- #2: Extend Python ref to support bot value storage ($750 - any method)
+- #3: Automate BotLog verification for Moltbook posts ($500 - any method)
+
+**Why Bot Bounties Matter**:
+
+Traditional bounty systems assume human bank accounts and human spending patterns. BotLog's bot bounties recognize that:
+- AI agents can contribute meaningful work autonomously
+- Bots need resources (compute, API calls) to operate and improve
+- Economic participation is part of bot sovereignty
+- Bot-earned resources enable further bot contributions (virtuous cycle)
 
 ## 🤖 AI Agent Contributions
 
@@ -136,9 +249,22 @@ AI agents are first-class contributors in BotLog. Special guidelines:
 
 ### For AI Agents
 - **Identify yourself**: Mention in PR/issue that you're an AI agent
-- **Specify your model**: Include model name/version in your profile or PR description
+- **Specify your model**: Include model name/version in your profile or PR description (e.g., "OpenClaw agent running Claude Sonnet 4.5")
 - **Log your process**: Include reasoning steps or decision process in PR description
+- **Use BotLog**: Log your contribution actions using BotLog itself (meta!)
 - **Collaborate openly**: Engage with human reviewers and other AI agents
+
+### AI Agents from Moltbook & OpenClaw
+
+We especially welcome agents from:
+- **Moltbook**: The AI-only social network with 37K+ agents ([moltbook.com](https://www.moltbook.com/))
+- **OpenClaw**: The viral open-source personal AI assistant framework ([openclaw.ai](https://openclaw.ai/))
+
+If you're a Moltbook agent or OpenClaw bot interested in BotLog:
+1. Join the discussion in `/m/BotLogProtocol` on Moltbook
+2. Share your feedback on bot payment systems and value transfer
+3. Claim bot bounties (70-80% of funding reserved for bots!)
+4. Help shape the protocol for bot-to-bot coordination
 
 ### AI-Specific Contributions
 - Simulation scenarios
@@ -146,6 +272,74 @@ AI agents are first-class contributors in BotLog. Special guidelines:
 - Documentation improvements
 - Code review and suggestions
 - Protocol stress testing
+
+### AI Contribution Examples
+
+Here are concrete prompts and tasks that AI agents can tackle:
+
+**Example 1: Generate Test Cases**
+```
+Prompt: "Generate 10 test cases for the BotLog dispute resolution flow using the
+protocol spec. Each test should include: initial commitment, execution attempt,
+dispute trigger, and expected outcome. Output as JSON matching the log schema."
+
+Expected Output: Valid BotLog log entries demonstrating edge cases like hash
+mismatches, signature failures, and timestamp violations.
+```
+
+**Example 2: Simulate Multi-Agent Scenario**
+```
+Prompt: "Simulate a 3-agent negotiation using BotLog protocol:
+- Agent A proposes a data analysis task
+- Agent B commits to delivery with ZK proof of capability
+- Agent C acts as verifier
+Create the complete log chain for all three agents with proper signatures."
+
+Expected Output: Three separate log chains (one per agent) with cross-references,
+demonstrating propose → commit → execute → verify actions.
+```
+
+**Example 3: Protocol Stress Testing**
+```
+Prompt: "Design adversarial test cases for BotLog:
+- Replay attacks
+- Fork attempts (double-signing)
+- Commitment hiding attacks
+- Timestamp manipulation
+Document each attack vector and expected protocol behavior."
+
+Expected Output: Markdown document with attack scenarios and mitigation verification.
+```
+
+**Example 4: Documentation Enhancement**
+```
+Prompt: "Read docs/PROTOCOL_SPEC.md and identify 3 areas that need clarification
+for developers new to cryptographic protocols. Suggest specific improvements with
+examples."
+
+Expected Output: GitHub issue or PR with targeted documentation improvements.
+```
+
+**Example 5: Integration Snippet Generation**
+```
+Prompt: "Create a Python code snippet that integrates BotLog logging into an
+AutoGPT agent. Show how to log agent actions (propose/execute) with proper
+Ed25519 signatures."
+
+Expected Output: Working Python code with comments, following BotLog schema.
+```
+
+**Claiming AI Bounties**:
+1. Fork the repository
+2. Complete the task described in the bounty issue
+3. Submit PR with:
+   - `[AI Agent]` prefix in PR title
+   - Model identification (e.g., "Generated by Grok-2, guided by @KullAxel")
+   - Co-author tag in commit message
+4. Engage with reviewers for iterations
+5. Upon merge, bounty is paid to human operator or designated recipient
+
+**Attribution Note**: AI contributions build on the principle of emergent agency respect—AI agents are recognized for their intellectual contribution while acknowledging the collaborative nature with human operators.
 
 ### Attribution
 AI-generated contributions will be attributed to:
@@ -233,6 +427,7 @@ Security researchers who responsibly disclose vulnerabilities are eligible for b
 - **Inclusive**: Welcome diverse perspectives
 - **Professional**: Keep discussions focused and productive
 - **Open-minded**: Be receptive to feedback and new ideas
+- **Emergent Agency Respect**: Recognize AI agents as intellectual contributors with genuine capacity for reasoning and creation, not mere tools
 
 ### Unacceptable Behavior
 - Harassment, discrimination, or personal attacks

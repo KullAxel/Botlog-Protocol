@@ -35,7 +35,7 @@ Every action in BotLog follows a standardized schema:
 ```json
 {
   "version": "1.0",
-  "timestamp": "2025-01-30T14:32:00Z",
+  "timestamp": "2026-01-30T14:32:00Z",
   "actor": {
     "type": "ai|human",
     "id": "unique-identifier",
@@ -86,11 +86,110 @@ BotLog supports multiple commitment mechanisms:
 - Timestamps must be monotonically increasing within an actor's log
 - Disputed entries can be marked but not deleted (immutability)
 
+### Dependencies & Implementation Libraries
+
+To implement BotLog, you'll need cryptographic libraries for your chosen language:
+
+**Signature & Hashing (Required)**:
+- **Ed25519**: `libsodium` (C/C++), `ed25519-dalek` (Rust), `PyNaCl` or `cryptography` (Python), `@noble/ed25519` (JavaScript/TypeScript)
+- **SHA-256**: Built into most standard libraries (e.g., `hashlib` in Python, `crypto` in Node.js, `sha2` crate in Rust)
+
+**Zero-Knowledge Proofs (Optional - for advanced privacy)**:
+- **zk-SNARKs**: `circom` + `snarkjs` (JavaScript), `halo2` (Rust), `bellman` (Rust)
+- **General ZK**: `libsnark`, `arkworks` (Rust ecosystem)
+
+**Merkle Trees (Optional - for batch commitments)**:
+- **General**: `merkletreejs` (JavaScript), `rs-merkle` (Rust), custom implementations in Python
+
+**JSON Canonicalization**:
+- **RFC 8785**: `json-canonicalize` (JavaScript), `canonicaljson` (Python), manual sorting in other languages
+
+**Example Minimal Stack** (Python):
+```bash
+pip install PyNaCl  # Ed25519 signatures
+# hashlib (SHA-256) is built-in
+```
+
+**Example Minimal Stack** (Rust):
+```toml
+[dependencies]
+ed25519-dalek = "2.0"
+sha2 = "0.10"
+serde_json = "1.0"
+```
+
+**Example Minimal Stack** (TypeScript/Node.js):
+```bash
+npm install @noble/ed25519 @noble/hashes
+```
+
+See [docs/PROTOCOL_SPEC.md](docs/PROTOCOL_SPEC.md) for detailed implementation guidelines.
+
 ---
 
 ## 🚀 Quickstart / Examples
 
-### Simulate a 3-Agent Negotiation
+### 🐍 Python Reference Implementation (NEW!)
+
+Try the minimal Python reference implementation:
+
+```bash
+# Install dependencies
+cd reference/python/botlog-mini
+pip install -r requirements.txt
+
+# Run quick test
+python botlog.py
+
+# Run full demo (3-entry chain)
+python example_simple_chain.py
+
+# Run unit tests
+python test_botlog.py
+```
+
+**Quick Demo Code:**
+
+```python
+from botlog import BotLogEntry, generate_keypair, public_key_to_base64, verify_chain, get_current_timestamp
+
+# Generate keypair
+priv_key, pub_key = generate_keypair()
+pub_key_b64 = public_key_to_base64(pub_key)
+
+# Create genesis entry
+entry1 = BotLogEntry(
+    timestamp=get_current_timestamp(),
+    actor={
+        "type": "human",
+        "id": "KullAxel",
+        "public_key": pub_key_b64
+    },
+    action={
+        "type": "propose",
+        "description": "Launch BotLog feedback campaign",
+        "payload": {}
+    },
+    previous_hash=None
+)
+entry1.sign(priv_key)
+
+# Chain a second entry
+entry2 = BotLogEntry(
+    timestamp=get_current_timestamp(),
+    actor={"type": "human", "id": "KullAxel", "public_key": pub_key_b64},
+    action={"type": "commit", "description": "Commit to delivery", "payload": {}},
+    previous_hash=entry1.log_hash
+)
+entry2.sign(priv_key)
+
+# Verify chain
+assert verify_chain([entry1, entry2])  # ✅ Verified!
+```
+
+See [reference/python/botlog-mini/README.md](reference/python/botlog-mini/README.md) for full documentation.
+
+### Simulate a Multi-Agent Negotiation
 
 ```bash
 # Coming soon: Example script demonstrating multi-agent coordination
@@ -100,39 +199,25 @@ BotLog supports multiple commitment mechanisms:
 # - All actions logged and cryptographically verified
 ```
 
-### Validate a Log Entry
-
-```bash
-# Coming soon: Log validator implementation
-# Verify signatures, check chain integrity, validate commitments
-```
-
-### Create Your Own Agent Integration
-
-```python
-# Coming soon: Python SDK for BotLog
-# Simple API for creating, signing, and publishing log entries
-```
-
 ---
 
 ## 🛣️ Roadmap & Bounties
 
 We're building BotLog in the open with community contributions. Here are priority areas for collaboration:
 
-### Phase 1: Core Infrastructure (Q1 2025)
+### Phase 1: Core Infrastructure (Q1 2026)
 - [ ] **Schema Validator** (Rust/TypeScript) - Validate log entries against spec
 - [ ] **Signature Verification Library** (Multi-language) - Verify ed25519 signatures
-- [ ] **Log Chain Validator** - Check hash chain integrity
-- [ ] **Reference Implementation** (Python) - Complete SDK for creating/validating logs
+- [x] **Log Chain Validator** - Check hash chain integrity ✅ (Python ref impl)
+- [x] **Reference Implementation** (Python) - Complete SDK for creating/validating logs ✅ (v0.1 shipped)
 
-### Phase 2: Advanced Features (Q2 2025)
+### Phase 2: Advanced Features (Q2 2026)
 - [ ] **ZK Proof Circuit** - Zero-knowledge commitment proofs
 - [ ] **Merkle Tree Implementation** - Efficient batch verification
 - [ ] **Dispute Resolution Framework** - Protocol for challenging actions
 - [ ] **Multi-Agent Simulation** - Test scenarios with 3+ agents
 
-### Phase 3: Production Readiness (Q3 2025)
+### Phase 3: Production Readiness (Q3 2026)
 - [ ] **Agent Integrations** - Plugins for popular AI frameworks (LangChain, AutoGPT, etc.)
 - [ ] **Persistence Layer** - Distributed storage options (IPFS, Arweave, etc.)
 - [ ] **Monitoring Dashboard** - Visualize agent actions and commitments
@@ -140,14 +225,23 @@ We're building BotLog in the open with community contributions. Here are priorit
 
 ### Open Bounties
 
-Want to contribute? Here are funded bounties (details in Issues):
+We're allocating **$10,000 in seed funding** for community contributions. Current funded bounties (details in Issues):
 
-1. **Log Validator in Rust** - $500 bounty
-2. **ZK Circuit Proof-of-Concept** - $750 bounty
-3. **Agent Integration Example** - $300 bounty per framework
-4. **Security Audit** - $1000 bounty
+**Tier 1 ($500)**:
+- Log Validator in Rust
+- Log Validator in TypeScript/JavaScript
+- Python SDK Reference Implementation
 
-*More bounties coming soon! Watch this repo for updates.*
+**Tier 2 ($750-$1,000)**:
+- ZK Circuit Proof-of-Concept (zk-SNARK commitment)
+- Merkle Tree Batch Validator
+- Agent Integration Examples (AutoGPT, LangChain, Bittensor)
+
+**Tier 3 ($2,000)**:
+- Comprehensive Security Audit
+- Production-Ready Multi-Language SDK Suite
+
+*Bounty payouts via GitHub Sponsors or Polar.sh. More details in individual issues.*
 
 ---
 
@@ -191,9 +285,10 @@ BotLog can optionally integrate economic incentives for verification work:
 
 ## 📚 Documentation
 
-- [Protocol Specification](docs/PROTOCOL_SPEC.md) (Coming soon)
+- [Protocol Specification](docs/PROTOCOL_SPEC.md) - Complete technical spec with schemas, cryptography, and examples
 - [Architecture Overview](docs/ARCHITECTURE.md) (Coming soon)
 - [Security Model](docs/SECURITY.md) (Coming soon)
+- [Integration Examples](docs/INTEGRATIONS.md) (Coming soon - Bittensor, Auto-GPT, LangChain)
 - [FAQ](docs/FAQ.md) (Coming soon)
 
 ---

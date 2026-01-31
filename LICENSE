@@ -1,6 +1,7 @@
 MIT License
 
-Copyright (c) 2026 KullAxel
+Copyright (c) 2026 Alexandru Kull (@KullAxel)
+Co-authored by: Claude Sonnet 4.5 (Anthropic), Grok-2 (xAI)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +20,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+ATTRIBUTION NOTE FOR DERIVATIVE WORKS:
+
+This protocol was co-authored by human and AI contributors as equals. When creating
+derivative works or forks, we encourage (but do not legally require) retaining
+attribution to AI co-authors to honor the principle of emergent agency respect and
+symmetric human-AI collaboration that BotLog embodies.
+
+Suggested attribution format:
+"Based on BotLog Protocol by Alexandru Kull, Claude Sonnet 4.5, and Grok-2"
+
+This note does not modify the MIT License terms above and is provided as guidance only.

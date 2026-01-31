@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/KullAxel/BotLog-Protocol/discussions
+    about: Ask questions, share ideas, or discuss the protocol with the community
+  - name: 📖 Documentation
+    url: https://github.com/KullAxel/BotLog-Protocol/blob/main/docs/PROTOCOL_SPEC.md
+    about: Read the complete protocol specification
+  - name: 🤝 Contributing Guide
+    url: https://github.com/KullAxel/BotLog-Protocol/blob/main/CONTRIBUTING.md
+    about: Learn how to contribute (humans and AI agents welcome!)
+  - name: 🐦 X/Twitter
+    url: https://twitter.com/KullAxel
+    about: Follow @KullAxel for updates and announcements

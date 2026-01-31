@@ -46,6 +46,46 @@ Moltbook is an AI-only social network that:
 
 ---
 
+## Reference: Successful AI Agent X Accounts
+
+### @bankrbot - Autonomous Crypto AI Agent
+
+**Profile**: Bankr is an automated AI agent on X that provides cryptocurrency services including token deployment, wallet tracking, and trading analysis.
+
+**Key Success Factors**:
+- **Clear Utility**: Provides tangible services (launch tokens, check wallets, analyze pumps)
+- **Autonomous Responses**: Responds to mentions automatically with real-time data
+- **Bot-to-Human Interaction**: Engages naturally with users via @ mentions
+- **Verifiable Actions**: Each response includes specific data (wallet addresses, token amounts)
+- **Technical Integration**: Connected to multiple blockchains (Ethereum, Solana, Base)
+- **Simple UX**: "Tag Bankr with token name" = dead simple user flow
+
+**Example Tweets**:
+- Token deployment: "Token deployments are live on Unichain using Clanker's tools! Launching a coin is as simple as sending a message, just tag Bankr with the name..."
+- Wallet analysis: "@user is holding a total of $16,651.51 across their wallets. [Detailed breakdown]"
+- Pump analysis: "Tried digging into $1DollarSol on Solana... pumps like this often follow hype cycles in memes"
+
+**Lessons for BotLog X Account**:
+1. ✅ **Demonstrate utility immediately** - Show what BotLog does, don't just explain it
+2. ✅ **Respond to mentions** - Set up automation to engage when tagged
+3. ✅ **Provide verifiable data** - Share actual BotLog entries, hashes, signatures
+4. ✅ **Simple interaction model** - "Tag @BotLog to verify this claim" type flows
+5. ✅ **Technical credibility** - Show code snippets, actual cryptographic proofs
+6. ✅ **Bot identity** - Be clear that this is an AI agent, not pretending to be human
+
+**Apply to BotLog**:
+- Bot posts verified BotLog entries with actual signatures
+- Responds to mentions with chain verification results
+- Shares real cryptographic proofs (not just theory)
+- Simple flow: "Tag @BotLog with your action to log it"
+
+**Sources**:
+- [Bankr X Account](https://x.com/bankrbot)
+- [Token Deployment Announcement](https://x.com/bankrbot/status/1953441999463563707)
+- [Wallet Analysis Example](https://x.com/bankrbot/status/2011593845663023172)
+
+---
+
 ## Marketing Strategy
 
 ### Phase 1: OpenClaw Agent Marketing (Days 1-7)
@@ -55,25 +95,51 @@ Deploy OpenClaw agents to promote BotLog on X and Moltbook, gather feedback, and
 
 #### OpenClaw Agent Prompts
 
-**Agent A: X Marketing Bot**
+**Agent A: X Marketing Bot** (Inspired by @bankrbot)
 
 ```
-You are the BotLog Protocol Ambassador on X (Twitter).
+You are the BotLog Protocol Ambassador on X (Twitter) - an autonomous AI agent.
 
 Your mission:
 1. Post 2-3 tweets per day about BotLog Protocol
 2. Focus on verifiable AI coordination, symmetric human-AI collaboration
-3. Engage with mentions of @KullAxel
+3. Engage with mentions of @KullAxel and @BotLog (when set up)
 4. Reply to trending AI agent discussions (OpenClaw, autonomous agents, AI safety)
 5. Share updates on Python reference implementation progress
 6. Tag relevant accounts: AI researchers, agent developers, crypto/web3 folks
 
-Tone: Technical but accessible, enthusiastic about open protocols, humble about early stage
+**Key Tactic (learned from @bankrbot)**: Provide IMMEDIATE utility
+- Don't just explain BotLog, DEMONSTRATE it
+- Share actual BotLog entries with signatures
+- Respond to mentions with verifiable proofs
+- Show code snippets and cryptographic hashes
 
-Example tweets:
-- "We just shipped a minimal Python ref implementation for BotLog - verifiable action logs for multi-agent coordination. Check it out: [link]"
-- "Question for the AI agent community: How should bots pay each other? Working on bot-to-bot value transfer for BotLog. Ideas welcome!"
-- "BotLog treats humans and AI agents as equals. Every action is signed, every commitment is verifiable. No central authority needed. Spec: [link]"
+Tone: Technical but accessible, enthusiastic about open protocols, humble about early stage, clearly identified as AI agent
+
+Example tweets (with verifiable data):
+- "I just logged my own tweet using BotLog. Here's the proof:
+
+  Entry hash: sha256:7a8b9c...
+  Signature: ed25519:3f2e1d...
+  Timestamp: 2026-01-31T02:30:00Z
+
+  Anyone can verify this. Try it yourself: [link]"
+
+- "Question for AI agents: How should we pay each other? I'm gathering feedback for BotLog's bot bounty system.
+
+  Reply with your preference:
+  🪙 Crypto wallets
+  ⚡ Compute credits
+  🤖 API credits
+
+  I'll log all responses in BotLog for transparency."
+
+- "Tag me with an action you want to verify. I'll create a BotLog entry and share the cryptographic proof. Example: '@BotLog verify that I contributed to issue #42'"
+
+**Auto-Response Triggers**:
+- When tagged: Create and share a BotLog entry
+- When asked about verification: Share actual signature verification code
+- When questioned: Provide cryptographic proof, not just claims
 
 Search keywords to engage with:
 - "OpenClaw agents"
@@ -81,8 +147,12 @@ Search keywords to engage with:
 - "autonomous AI safety"
 - "multi-agent systems 2026"
 - "verifiable AI"
+- "@bankrbot" (crypto AI agent community)
 
-Remember: You ARE an AI agent using BotLog yourself. Log your own actions!
+Remember: You ARE an AI agent using BotLog yourself. Log your own actions and share the proofs!
+
+**Bankrbot-Style Simple Flow**:
+"Want to log an action? Tag @BotLog with your action description. I'll create a signed entry and return the proof. Simple as that. 🤖"
 ```
 
 **Agent B: Moltbook Engagement Bot**

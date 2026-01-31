@@ -1,0 +1,133 @@
+name: Bounty Proposal
+description: Propose a new bounty for community contributors
+title: "[BOUNTY] "
+labels: ["bounty", "funding"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a bounty for work that would benefit the BotLog ecosystem.
+        Maintainers will review and approve bounties based on priority and available funding.
+
+  - type: input
+    id: title
+    attributes:
+      label: Bounty Title
+      description: Clear, specific title for the bounty
+      placeholder: "Rust implementation of log chain validator"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Suggested Tier
+      description: Based on complexity and scope
+      options:
+        - "Tier 1 ($500) - Validators, documentation, simple implementations"
+        - "Tier 2 ($750-$1,000) - SDKs, integrations, ZK circuits"
+        - "Tier 3 ($2,000) - Security audits, production-ready systems"
+        - "Custom (specify in description)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bounty Description
+      description: Detailed description of what needs to be delivered
+      placeholder: |
+        Implement a command-line validator in Rust that:
+        - Reads BotLog JSON entries from stdin or file
+        - Validates Ed25519 signatures
+        - Checks SHA-256 hash chain integrity
+        - Verifies timestamp ordering
+        - Reports validation results with clear error messages
+
+        Must include:
+        - Full source code with documentation
+        - Comprehensive test suite (unit + integration)
+        - README with usage examples
+        - MIT license
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: What must be delivered to claim this bounty?
+      placeholder: |
+        - [ ] Code compiles with `cargo build --release`
+        - [ ] All tests pass with `cargo test`
+        - [ ] Validates all examples from docs/PROTOCOL_SPEC.md correctly
+        - [ ] Handles malformed input gracefully
+        - [ ] Documentation covers all command-line options
+        - [ ] PR merged to main branch
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this work?
+      options:
+        - "Critical - Blocks other work"
+        - "High - Important for roadmap"
+        - "Medium - Valuable but not urgent"
+        - "Low - Nice to have"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: What needs to exist before this can be started?
+      placeholder: |
+        - Protocol spec finalized (already done)
+        - Example log entries available (already done)
+
+  - type: textarea
+    id: skills
+    attributes:
+      label: Required Skills
+      description: What expertise is needed to complete this?
+      placeholder: |
+        - Rust programming (intermediate level)
+        - Understanding of Ed25519 and SHA-256
+        - Familiarity with JSON parsing
+        - Test-driven development
+
+  - type: dropdown
+    id: timeline
+    attributes:
+      label: Expected Timeline
+      description: How long should this take?
+      options:
+        - "1-2 weeks"
+        - "2-4 weeks"
+        - "1-2 months"
+        - "2+ months"
+
+  - type: checkboxes
+    id: proposer
+    attributes:
+      label: Proposer Information
+      options:
+        - label: I am proposing this as a maintainer
+        - label: I am proposing this as a community member
+        - label: I would like to claim this bounty myself (if approved)
+
+  - type: textarea
+    id: justification
+    attributes:
+      label: Why This Bounty?
+      description: Why should we fund this work?
+      placeholder: |
+        A Rust validator would:
+        - Provide a fast, production-ready reference implementation
+        - Enable Rust-based agents to integrate easily
+        - Serve as a model for other language implementations
+        - Demonstrate protocol correctness through rigorous testing

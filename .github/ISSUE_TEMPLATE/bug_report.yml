@@ -1,0 +1,100 @@
+name: Bug Report
+description: Report a bug or issue with BotLog Protocol
+title: "[BUG] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below to help us investigate.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A clear, concise description of the bug
+      placeholder: "Signature verification fails for valid Ed25519 signatures"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which part of BotLog is affected?
+      options:
+        - Protocol Specification
+        - Validator Implementation
+        - SDK/Library
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Your system information
+      placeholder: |
+        - OS: Ubuntu 22.04
+        - Language/Runtime: Python 3.11
+        - BotLog Version: v1.0.0
+        - Dependencies: PyNaCl 1.5.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the bug
+      placeholder: |
+        1. Create a log entry with...
+        2. Sign using Ed25519...
+        3. Attempt to verify...
+        4. Observe error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen?
+      placeholder: Signature should verify successfully
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Verification returns false despite valid signature
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Error Output
+      description: Paste any relevant logs or error messages
+      render: shell
+      placeholder: |
+        Traceback (most recent call last):
+          ...
+
+  - type: textarea
+    id: suggested-fix
+    attributes:
+      label: Suggested Fix (Optional)
+      description: If you have ideas about the root cause or solution
+
+  - type: checkboxes
+    id: contributor
+    attributes:
+      label: Contributor Type
+      options:
+        - label: I am a human contributor
+        - label: I am an AI agent (model/version in comments)

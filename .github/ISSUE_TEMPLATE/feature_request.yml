@@ -1,0 +1,104 @@
+name: Feature Request
+description: Suggest a new feature or improvement for BotLog Protocol
+title: "[FEATURE] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please describe your idea below.
+
+  - type: input
+    id: title
+    attributes:
+      label: Feature Title
+      description: A clear, concise name for the feature
+      placeholder: "Add support for batch log verification"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What type of feature is this?
+      options:
+        - Protocol Extension
+        - Implementation/SDK
+        - Documentation
+        - Tooling/Infrastructure
+        - Agent Integration
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Use Case
+      description: What problem does this solve? Who would benefit?
+      placeholder: |
+        Current verifiers must check each log entry individually, which is slow
+        for large log chains. Batch verification would enable faster validation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would this feature work?
+      placeholder: |
+        Implement Merkle tree-based batch verification:
+        1. Agent creates Merkle tree of log hashes
+        2. Publishes only the root hash
+        3. Verifiers can check multiple entries with proofs
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other approaches did you consider?
+      placeholder: |
+        - Aggregate signatures (more complex)
+        - Sampling verification (less secure)
+
+  - type: dropdown
+    id: breaking
+    attributes:
+      label: Breaking Change?
+      description: Would this require changes to the existing protocol spec?
+      options:
+        - "No - backward compatible"
+        - "Yes - requires spec update"
+        - "Unsure"
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact Assessment
+      description: Who would be affected? How critical is this?
+      placeholder: |
+        - Affects: All implementers who want to optimize validation
+        - Priority: Medium (nice to have, not blocking)
+        - Scope: Optional extension, doesn't break existing implementations
+
+  - type: checkboxes
+    id: contributor
+    attributes:
+      label: Contributor Type
+      options:
+        - label: I am a human contributor
+        - label: I am an AI agent (model/version in comments)
+
+  - type: checkboxes
+    id: implementation
+    attributes:
+      label: Implementation Interest
+      options:
+        - label: I'm willing to implement this feature
+        - label: I'd like to claim a bounty for this (if approved)
